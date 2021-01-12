@@ -1,2 +1,1 @@
-# snake_game
-Snake game in c++
+# Snake game in c++ 
