@@ -54,7 +54,7 @@ public:
 
 class CGroup:public CView
 {
-  list< CView * > children;
+list< CView * > children;
 public:
   CGroup(CRect g) : CView(g) {}
   ~CGroup();

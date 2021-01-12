@@ -145,7 +145,7 @@ void CGroup::insert(CView * v)
 CGroup::~CGroup()
 {
   for (list< CView * >::iterator i = children.begin();
-       i != children.end(); i++)
+      i != children.end(); i++)
     delete(*i);
 }
 
