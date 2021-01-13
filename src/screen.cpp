@@ -1,4 +1,3 @@
-/* screen.cpp */
 #include "screen.h"
 #include "cpoint.h"
 

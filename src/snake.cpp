@@ -1,5 +1,4 @@
 #include "snake.h"
-#include "winsys.h"
 #include "screen.h"
 #include <time.h>
 
@@ -44,7 +43,7 @@ void CSnake::paint(){
     paint_help();
   }
 
-  napms(START_SLEEP - 2 * (snake_body.size() / 3)); //adjust this value
+  napms(START_SLEEP - 5 * (snake_body.size() / 3)); //adjust this value
 }
 
 void CSnake::paint_help(){
@@ -138,41 +137,20 @@ void CSnake::new_food(){
 
 bool CSnake::handleEvent(int key){
 
-  if ((help || !play || game_over)){
-
-          gotoyx(32, 20);
-      printl("CHECK sss");
-
-    CFramedWindow::handleEvent(key);
-
-          gotoyx(32, 60);
-      printl("CHECK sss2");
-
-    // if (CFramedWindow::handleEvent(key)){
-    //       gotoyx(28, 30);
-    //   printl("CHECK ttt");
-    //   return true;
-    // }
-    
-    return true;
-  }
-
-    gotoyx(31, 0);
-    printl("CHECK 12 %d", key);
-
-
   if (key == 'h'){
 
     if (help == true){
 
-      play = true;
       help = false;
     }
     else{
 
-      play = false;
       help = true;
     }
+  }
+  else if (key == '\t'){
+
+    return false;
   }
   else if (key == 'p'){
 
@@ -182,9 +160,9 @@ bool CSnake::handleEvent(int key){
 
     restart_game();
   }
-  else if (){
+  else if (help || !play || game_over){
 
-    
+    CFramedWindow::handleEvent(key);
   }
   else if (play && !help && !game_over){
     
@@ -203,7 +181,6 @@ bool CSnake::handleEvent(int key){
   }
   else{
 
-    //move_snake(prev_key);
     return false;
   }
 
@@ -216,21 +193,26 @@ void CSnake::move_snake(int key){
 
   switch (key){
 
-    case KEY_UP:
+    case KEY_UP:{
       temp.x = snake_body.back()->x;
       temp.y = snake_body.back()->y - 1;
-
-    case KEY_RIGHT:
+      break;
+    }
+    case KEY_RIGHT:{
       temp.x =snake_body.back()->x + 1;
       temp.y = snake_body.back()->y;
-
-    case KEY_DOWN:
+      break;
+    }
+    case KEY_DOWN:{
       temp.x = snake_body.back()->x;
       temp.y = snake_body.back()->y + 1;
-
-    case KEY_LEFT:
+      break;
+    }
+    case KEY_LEFT:{
       temp.x =snake_body.back()->x - 1;
       temp.y = snake_body.back()->y;
+      break;
+    }
   }
 
   if (temp.x <= 0){
@@ -253,17 +235,11 @@ void CSnake::move_snake(int key){
 
   for (list< CPoint * >::iterator i = snake_body.begin(); i != snake_body.end(); ++i){
 
-
-
     if ((*i)->x == temp.x && (*i)->y == temp.y){
-
-    gotoyx(28, 0);
-    printl("CHECK 3333");
-    napms(1000);
 
       game_over = true;
       play = false;
-      return; // maybe does not required
+      return;
     }
   }
 

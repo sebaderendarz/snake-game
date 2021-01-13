@@ -2,7 +2,7 @@
 #define __SNAKE_H__
 
 #include "winsys.h"
-#define START_SLEEP 100
+#define START_SLEEP 120
 
 class CSnake:public CFramedWindow
 {
@@ -24,7 +24,7 @@ public:
   void paint_food();
   void restart_game();
   void clear_snake_body();
-  void new_food(); // maybe bool
+  void new_food();
   void move_snake(int key);
   bool handleEvent(int key);
 
