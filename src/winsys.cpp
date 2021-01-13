@@ -185,9 +185,13 @@ void CDesktop::run()
   paint();
   refresh();
 
+  int w = 0;
+
   while(1)
   {
     int c = getEvent();
+
+    flushinp();
 
     if(c == 'q' || c == 'Q')
       break;
@@ -196,6 +200,12 @@ void CDesktop::run()
     {
       update_screen();
       paint();
+
+      gotoyx(30, 0);
+      printl("MAIN %d", w);
+      napms(500);
+      w++;
+
       refresh();
     }
   }
